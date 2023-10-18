@@ -33,14 +33,13 @@ body {
                 
                     &.error {
                         animation: horizontal-shaking .3s linear 1 alternate;
-
+                        
                         label, input::placeholder, p { color: $color-error; }
                         input { 
                             border-color: $color-error;
                             box-shadow: -1px -1px 2px inset $color-error;
                         }
                     }
-                
 
                     label, input {
                         display: block;
@@ -76,6 +75,7 @@ body {
             
             button {
                 padding: .62rem 1rem;
+                cursor: pointer;
 
                 border: 1px solid $color-grey;
                 border-radius: 5px;

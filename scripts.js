@@ -4,7 +4,7 @@ const errorMessages = {
     email: 'Must be a valid email address',
     phone: 'Must be a valid swedish cell phone number (+46123465789)',
     pin: 'Must be exactly six numerical digits (123456)',
-    pinConfirm: 'Pin confirmation must be the same as the pin'
+    pinConfirm: 'Pin confirmation must be six numerical digits and the same as the pin'
 }
 
 const defaultMessages = {
@@ -38,7 +38,6 @@ function validateSubmit(e) {
 
     for (const key in user ) {
         let obj = `${user[key]}-object`
-        obj.classList.remove('error'); //FUNKAR DETTA
         ifEmpty(user[key]);
         validationSwitch(user[key], user.pin.value.toString());
     }   
@@ -84,17 +83,20 @@ function validationSwitch(obj, pin) {
         case 'pinConfirm':
             console.log('switch pinConfirm');
             const pinConfirmRegex = /^\d{6}$/;
-            if (pinConfirmRegex.test(obj.value)) {
-
-            }
-        
-            if (obj.value != pin) {
+            if (!pinConfirmRegex.test(obj.value)) {
                 error(obj, true);
                 break;
             }
             else {
-                break;
+                if (obj.value != pin) {
+                    error(obj, true);
+                    break;
+                }
+                else {
+                    break;
+                }
             }
+            
         default:
           break;
       }
@@ -111,5 +113,5 @@ function error(obj, add) {
     else {
         target.classList.remove('error');
         errorP.innerHTML = defaultMessages[obj.id];
-    }
+    }    
 }
