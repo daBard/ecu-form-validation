@@ -1,0 +1,83 @@
+$color-dark: #222222;
+$color-grey: #adadad;
+$color-light: #dedede;
+$color-error: red;
+
+:root {
+    font-size: 16px;
+}
+
+body {
+    height: 100dvh;
+    width: 100dvw;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    main {
+        height: 100%;
+        padding: 1rem;
+    
+        form {
+            height: 100%;
+
+            .form-content {
+
+                .input-object {
+                    margin-bottom: .5rem;
+                
+                    &.error {
+                        animation: horizontal-shaking .3s linear 1 alternate;
+
+                        label, input::placeholder, p { color: $color-error; }
+                        input { 
+                            border-color: $color-error;
+                            box-shadow: -1px -1px 2px inset $color-error;
+                        }
+                    }
+                
+
+                    label, input {
+                        display: block;
+                        width: 100%;
+                    }
+                    
+                    label {
+                        font-weight: 600;
+                    }
+
+                    input {
+                        margin: .25rem 0;
+                        padding: .25rem;
+                        border: 1px solid $color-grey;
+                        box-shadow: -1px -1px 2px inset $color-grey;
+
+                        &::placeholder {
+                            color: $color-grey;
+                        }
+                    }
+
+                    p {
+                        height: 1rem;
+                        font-size: .8rem;
+                    }
+                }
+            }
+            
+            button {
+                padding: .62rem 1rem;
+
+                border: 1px solid $color-grey;
+                background-color: $color-dark;
+                color: $color-light;
+            }
+        }
+    }
+}
+
+@keyframes horizontal-shaking {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(5px) }
+    50% { transform: translateX(-5px) }
+    75% { transform: translateX(5px) }
+    100% { transform: translateX(0) }
+}

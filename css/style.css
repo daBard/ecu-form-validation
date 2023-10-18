@@ -1,0 +1,73 @@
+:root {
+  font-size: 16px;
+}
+
+body {
+  height: 100dvh;
+  width: 100dvw;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body main {
+  height: 100%;
+  padding: 1rem;
+}
+body main form {
+  height: 100%;
+}
+body main form .form-content .input-object {
+  margin-bottom: 0.5rem;
+}
+body main form .form-content .input-object.error {
+  animation: horizontal-shaking 0.3s linear 1 alternate;
+}
+body main form .form-content .input-object.error label, body main form .form-content .input-object.error input::placeholder, body main form .form-content .input-object.error p {
+  color: red;
+}
+body main form .form-content .input-object.error input {
+  border-color: red;
+  box-shadow: -1px -1px 2px inset red;
+}
+body main form .form-content .input-object label, body main form .form-content .input-object input {
+  display: block;
+  width: 100%;
+}
+body main form .form-content .input-object label {
+  font-weight: 600;
+}
+body main form .form-content .input-object input {
+  margin: 0.25rem 0;
+  padding: 0.25rem;
+  border: 1px solid #adadad;
+  box-shadow: -1px -1px 2px inset #adadad;
+}
+body main form .form-content .input-object input::placeholder {
+  color: #adadad;
+}
+body main form .form-content .input-object p {
+  height: 1rem;
+  font-size: 0.8rem;
+}
+body main form button {
+  padding: 0.62rem 1rem;
+  border: 1px solid #adadad;
+  background-color: #222222;
+  color: #dedede;
+}
+
+@keyframes horizontal-shaking {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}/*# sourceMappingURL=style.css.map */

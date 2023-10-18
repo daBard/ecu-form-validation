@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="se">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>JS Form Validation</title>
+</head>
+<body>
+    
+    <main>
+        <form onsubmit="validateSubmit(event)">
+            <div class="form-content">
+                <div id="fname-object" class="input-object">
+                    <label for="fname">First name*</label>
+                    <input type="text" id="fname" onkeyup="validateKeyUp(event)" name="fname" placeholder="John">
+                    <p></p>
+                </div>
+
+                <div id="lname-object" class="input-object">
+                    <label for="lname">Last name*</label>
+                    <input type="text" id="lname" onkeyup="validateKeyUp(event)" name="lname" placeholder="Doe">
+                    <p></p>
+                </div>
+                
+                <div id="email-object" class="input-object">
+                    <label for="email">Email*</label>
+                    <input type="email" id="email" onkeyup="validateKeyUp(event)" name="email" placeholder="john.doe@example.com">
+                    <p></p>
+                </div>
+            
+                <div id="phone-object" class="input-object">    
+                    <label for="phone">Phone number*</label>
+                    <input type="tel" id="phone" onkeyup="validateKeyUp(event)" name="phone" placeholder="+46123456789">
+                    <p></p>
+                </div>
+                
+                <div id="pin-object" class="input-object">
+                    <label for="pin">Pin number*</label>
+                    <input type="password" id="pin" onkeyup="validateKeyUp(event)" name="pin" placeholder="123456">
+                    <p>The pin needs to be exactly six numerical digits long.</p>
+                </div>
+
+                <div id="pinConfirm-object" class="input-object">
+                    <label for="pin-confirm">Confirm pin number*</label>
+                    <input type="password" id="pinConfirm" onkeyup="validateKeyUp(event)" name="pinConfirm" placeholder="123456">
+                    <p></p>
+                </div>
+            </div>
+            <button type="submit">Skicka in!</button>
+        </form>
+    </main>
+
+
+    <script src="/scripts.js"></script>
+</body>
+</html>
