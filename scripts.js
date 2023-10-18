@@ -16,6 +16,15 @@ const defaultMessages = {
     pinConfirm: '',
 }
 
+const formInputs = {
+    fname: document.querySelector('#fname'),
+    lname: document.querySelector('#lname'),
+    email: document.querySelector('#email'),
+    phone: document.querySelector('#phone'),
+    pin: document.querySelector('#pin'),
+    pinConfirm: document.querySelector('#pinConfirm')
+}
+
 function validateKeyUp (e) {
     e.preventDefault();
 
@@ -26,21 +35,12 @@ function validateKeyUp (e) {
 
 function validateSubmit(e) {
     e.preventDefault();
-    
-    const user = {
-        fname: document.querySelector('#fname'),
-        lname: document.querySelector('#lname'),
-        email: document.querySelector('#email'),
-        phone: document.querySelector('#phone'),
-        pin: document.querySelector('#pin'),
-        pinConfirm: document.querySelector('#pinConfirm')
-    }
 
-    for (const key in user ) {
-        let obj = `${user[key]}-object`
-        ifEmpty(user[key]);
-        validationSwitch(user[key], user.pin.value.toString());
-    }   
+    for (const key in formInputs ) {
+        let obj = `${formInputs[key]}-object`
+        ifEmpty(formInputs[key]);
+        validationSwitch(formInputs[key], formInputs.pin.value.toString());
+    }
 }
 
 function ifEmpty(obj) {
@@ -59,8 +59,6 @@ function validationSwitch(obj, pin) {
         default:
             break;
     }
-    
-    console.log(obj.id);
 
     switch(obj.id) {
         case 'email':
@@ -68,16 +66,11 @@ function validationSwitch(obj, pin) {
             error(obj, !emailRegex.test(obj.value));
             break;
         case 'phone':
-            // if (obj.value !== '' || obj.value.charAt(0) != '+' || (obj.value.charAt(0) != '0' && obj.value.charAt(1) != '4')) {
-            //     obj.value = `+46${obj.value.substring(1)}`
-            // }
             const phoneRegex = /^(?:\+46|0046)(7[0236]\d{7})$/;
             error(obj, !phoneRegex.test(obj.value));
             break;
         case 'pin':
             const pinRegex = /^\d{6}$/;
-            console.log('switch pin');
-            console.log(!pinRegex.test(obj.value));
             error(obj, !pinRegex.test(obj.value));
             break;
         case 'pinConfirm':
@@ -108,6 +101,7 @@ function error(obj, add) {
 
     if (add) {
         target.classList.add('error');
+        target.classList.add('shake');
         errorP.innerHTML = errorMessages[obj.id];
     }
     else {
@@ -115,3 +109,10 @@ function error(obj, add) {
         errorP.innerHTML = defaultMessages[obj.id];
     }    
 }
+
+document.querySelector('body').addEventListener('mousedown', (e) => {
+    for (const key in formInputs ) {
+        let obj = `${formInputs[key].id}-object`
+        document.querySelector(`#${obj}`).classList.remove('shake')
+    }
+})

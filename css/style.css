@@ -21,15 +21,15 @@ body main form {
 body main form .form-content .input-object {
   margin-bottom: 0.5rem;
 }
-body main form .form-content .input-object.error {
-  animation: horizontal-shaking 0.3s linear 1 alternate;
-}
 body main form .form-content .input-object.error label, body main form .form-content .input-object.error input::placeholder, body main form .form-content .input-object.error p {
   color: red;
 }
 body main form .form-content .input-object.error input {
   border-color: red;
   box-shadow: -1px -1px 2px inset red;
+}
+body main form .form-content .input-object.shake {
+  animation: horizontal-shaking 0.3s linear 1 alternate;
 }
 body main form .form-content .input-object label, body main form .form-content .input-object input {
   display: block;
