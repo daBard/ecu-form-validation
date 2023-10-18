@@ -5,10 +5,14 @@
 body {
   height: 100dvh;
   width: 100dvw;
+  display: flex;
+  justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
 }
 body main {
   height: 100%;
+  width: 100%;
+  max-width: 640px;
   padding: 1rem;
 }
 body main form {
@@ -36,9 +40,10 @@ body main form .form-content .input-object label {
 }
 body main form .form-content .input-object input {
   margin: 0.25rem 0;
-  padding: 0.25rem;
+  padding: 0.5rem 0.25rem;
   border: 1px solid #adadad;
   box-shadow: -1px -1px 2px inset #adadad;
+  border-radius: 5px;
 }
 body main form .form-content .input-object input::placeholder {
   color: #adadad;
@@ -50,8 +55,15 @@ body main form .form-content .input-object p {
 body main form button {
   padding: 0.62rem 1rem;
   border: 1px solid #adadad;
+  border-radius: 5px;
   background-color: #222222;
   color: #dedede;
+  box-shadow: -1px -1px 2px #adadad;
+  transition: all 0.3s ease-in-out;
+}
+body main form button:hover {
+  scale: 1.05;
+  box-shadow: -2px -2px 4px #adadad;
 }
 
 @keyframes horizontal-shaking {

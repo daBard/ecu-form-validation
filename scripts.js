@@ -2,7 +2,7 @@ const errorMessages = {
     fname: 'Must be at least one character',
     lname: 'Must be at least one character',
     email: 'Must be a valid email address',
-    phone: 'Must be a valid swedish cell phone number',
+    phone: 'Must be a valid swedish cell phone number (+46123465789)',
     pin: 'Must be exactly six numerical digits.',
     pinConfirm: 'Pin confirmation must be the same as the pin'
 }
@@ -39,7 +39,7 @@ function validateSubmit(e) {
 
     for (const key in user ) {
         ifEmpty(user[key]);
-        validationSwitch(user[key]);
+        validationSwitch(user[key], user.pin);
     }   
 }
 
@@ -55,7 +55,7 @@ function ifEmpty(obj) {
     }
 }
 
-function validationSwitch(obj) {
+function validationSwitch(obj, pin) {
     switch(obj.type) {
         case 'text':
             console.log('text switch')
@@ -70,7 +70,10 @@ function validationSwitch(obj) {
             break;
         case 'phone':
             console.log('phone switch')
-            const phoneRegex = /^(?:\+46|0046)(7[0236]\d{6})$/;
+            if (obj.value.charAt(0) != '+' || (obj.value.charAt(0) != '0' && obj.value.charAt(1) != '4')) {
+                obj.value = `+46${obj.value.substring(1)}`
+            }
+            const phoneRegex = /^(?:\+46|0046)(7[0236]\d{7})$/;
             error(obj, !phoneRegex.test(obj.value));
             break;
         case 'pin':
@@ -79,9 +82,10 @@ function validationSwitch(obj) {
             error(obj, !pinRegex.test(obj.value));
             break;
         case 'pinConfirm':
-            if (pinConfirm) {
+            if (obj.value != pin) {
                 console.log('pinConfirm switch')
-                break;}
+                break;
+            }
             else
                 break;
         default:

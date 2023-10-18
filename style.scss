@@ -11,10 +11,16 @@ body {
     height: 100dvh;
     width: 100dvw;
 
+    display: flex;
+    justify-content: center;
+
     font-family: Arial, Helvetica, sans-serif;
+
 
     main {
         height: 100%;
+        width: 100%;
+        max-width: 640px;
         padding: 1rem;
     
         form {
@@ -47,9 +53,10 @@ body {
 
                     input {
                         margin: .25rem 0;
-                        padding: .25rem;
+                        padding: .5rem .25rem;
                         border: 1px solid $color-grey;
                         box-shadow: -1px -1px 2px inset $color-grey;
+                        border-radius: 5px;
 
                         &::placeholder {
                             color: $color-grey;
@@ -67,8 +74,16 @@ body {
                 padding: .62rem 1rem;
 
                 border: 1px solid $color-grey;
+                border-radius: 5px;
                 background-color: $color-dark;
                 color: $color-light;
+                box-shadow: -1px -1px 2px $color-grey;
+                transition: all .3s ease-in-out;
+
+                &:hover {
+                    scale: 1.05;
+                    box-shadow: -2px -2px 4px $color-grey;
+                }
             }
         }
     }
