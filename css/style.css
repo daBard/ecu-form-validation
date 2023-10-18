@@ -48,6 +48,9 @@ body main form .form-content .input-object input {
 body main form .form-content .input-object input::placeholder {
   color: #adadad;
 }
+body main form .form-content .input-object input:focus::placeholder {
+  color: transparent;
+}
 body main form .form-content .input-object p {
   height: 1rem;
   font-size: 0.8rem;
@@ -82,4 +85,4 @@ body main form button:hover {
   100% {
     transform: translateX(0);
   }
-}/*# sourceMappingURL=style.css.map */
+}

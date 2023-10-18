@@ -3,7 +3,7 @@ const errorMessages = {
     lname: 'Must be at least one character',
     email: 'Must be a valid email address',
     phone: 'Must be a valid swedish cell phone number (+46123465789)',
-    pin: 'Must be exactly six numerical digits',
+    pin: 'Must be exactly six numerical digits (123456)',
     pinConfirm: 'Pin confirmation must be the same as the pin'
 }
 
@@ -22,7 +22,6 @@ function validateKeyUp (e) {
     const target = document.querySelector(`#${e.target.id}-object`);
     //const errorP = document.querySelector(`#${target.id} > p`);
     target.classList.remove('error');
-
 }
 
 function validateSubmit(e) {
@@ -38,8 +37,10 @@ function validateSubmit(e) {
     }
 
     for (const key in user ) {
+        let obj = `${user[key]}-object`
+        obj.classList.remove('error'); //FUNKAR DETTA
         ifEmpty(user[key]);
-        validationSwitch(user[key], user.pin);
+        validationSwitch(user[key], user.pin.value.toString());
     }   
 }
 
@@ -60,9 +61,9 @@ function validationSwitch(obj, pin) {
             break;
     }
     
-    console.log(obj.value);
+    console.log(obj.id);
 
-    switch(obj.id, pin) {
+    switch(obj.id) {
         case 'email':
             const emailRegex = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
             error(obj, !emailRegex.test(obj.value));
@@ -76,18 +77,24 @@ function validationSwitch(obj, pin) {
             break;
         case 'pin':
             const pinRegex = /^\d{6}$/;
+            console.log('switch pin');
+            console.log(!pinRegex.test(obj.value));
             error(obj, !pinRegex.test(obj.value));
             break;
         case 'pinConfirm':
-            console.log(obj.value)
-            console.log(pin)
+            console.log('switch pinConfirm');
+            const pinConfirmRegex = /^\d{6}$/;
+            if (pinConfirmRegex.test(obj.value)) {
 
+            }
+        
             if (obj.value != pin) {
-                error(obj, true)
+                error(obj, true);
                 break;
             }
-            else
+            else {
                 break;
+            }
         default:
           break;
       }
