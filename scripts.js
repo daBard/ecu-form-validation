@@ -3,7 +3,7 @@ const errorMessages = {
     lname: 'Must be at least one character',
     email: 'Must be a valid email address',
     phone: 'Must be a valid swedish cell phone number (+46123465789)',
-    pin: 'Must be exactly six numerical digits.',
+    pin: 'Must be exactly six numerical digits',
     pinConfirm: 'Pin confirmation must be the same as the pin'
 }
 
@@ -12,7 +12,7 @@ const defaultMessages = {
     lname: '',
     email: '',
     phone: '',
-    pin: 'The pin needs to be exactly six numerical digits long.',
+    pin: 'Six numerical digits (123456)',
     pinConfirm: '',
 }
 
@@ -44,9 +44,6 @@ function validateSubmit(e) {
 }
 
 function ifEmpty(obj) {
-
-    console.log(obj.value);
-
     if (obj.value == "") {
         error(obj, true)
     }
@@ -58,32 +55,35 @@ function ifEmpty(obj) {
 function validationSwitch(obj, pin) {
     switch(obj.type) {
         case 'text':
-            console.log('text switch')
             break;
         default:
             break;
     }
     
-    switch(obj.id) {
+    console.log(obj.value);
+
+    switch(obj.id, pin) {
         case 'email':
-            console.log('email switch')
+            const emailRegex = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+            error(obj, !emailRegex.test(obj.value));
             break;
         case 'phone':
-            console.log('phone switch')
-            if (obj.value.charAt(0) != '+' || (obj.value.charAt(0) != '0' && obj.value.charAt(1) != '4')) {
-                obj.value = `+46${obj.value.substring(1)}`
-            }
+            // if (obj.value !== '' || obj.value.charAt(0) != '+' || (obj.value.charAt(0) != '0' && obj.value.charAt(1) != '4')) {
+            //     obj.value = `+46${obj.value.substring(1)}`
+            // }
             const phoneRegex = /^(?:\+46|0046)(7[0236]\d{7})$/;
             error(obj, !phoneRegex.test(obj.value));
             break;
         case 'pin':
-            console.log('pin switch')
             const pinRegex = /^\d{6}$/;
             error(obj, !pinRegex.test(obj.value));
             break;
         case 'pinConfirm':
+            console.log(obj.value)
+            console.log(pin)
+
             if (obj.value != pin) {
-                console.log('pinConfirm switch')
+                error(obj, true)
                 break;
             }
             else
