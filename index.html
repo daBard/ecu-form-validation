@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="se">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
 <body>
     
     <main>
-        <form onsubmit="validateSubmit(event)">
+        <form onsubmit="validateSubmit(event)" novalidate>
             <div class="form-content">
                 <div id="fname-object" class="input-object">
                     <label for="fname">First name*</label>
@@ -38,13 +38,13 @@
                 
                 <div id="pin-object" class="input-object">
                     <label for="pin">Pin number*</label>
-                    <input type="password" id="pin" onkeyup="validateKeyUp(event)" name="pin" placeholder="123456">
+                    <input type="password" id="pin" onkeyup="validateKeyUp(event)" name="pin" placeholder="123456" pattern="[0-9]*" inputmode="numeric">
                     <p>Six numerical digits (123456)</p>
                 </div>
 
                 <div id="pinConfirm-object" class="input-object">
                     <label for="pinConfirm">Confirm pin number*</label>
-                    <input type="password" id="pinConfirm" onkeyup="validateKeyUp(event)" name="pinConfirm" placeholder="123456">
+                    <input type="password" id="pinConfirm" onkeyup="validateKeyUp(event)" name="pinConfirm" placeholder="123456" pattern="[0-9]*" inputmode="numeric">
                     <p></p>
                 </div>
             </div>

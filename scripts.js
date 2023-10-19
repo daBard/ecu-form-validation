@@ -1,3 +1,4 @@
+// OBJECTS
 const errorMessages = {
     fname: 'Must be at least one character',
     lname: 'Must be at least one character',
@@ -25,11 +26,19 @@ const formInputs = {
     pinConfirm: document.querySelector('#pinConfirm')
 }
 
+// EVENT LISTENERS
+document.querySelector('body').addEventListener('mousedown', (e) => {
+    for (const key in formInputs ) {
+        let obj = `${formInputs[key].id}-object`
+        document.querySelector(`#${obj}`).classList.remove('shake')
+    }
+})
+
+//FUNCTIONS
 function validateKeyUp (e) {
     e.preventDefault();
 
     const target = document.querySelector(`#${e.target.id}-object`);
-    //const errorP = document.querySelector(`#${target.id} > p`);
     target.classList.remove('error');
 }
 
@@ -37,9 +46,9 @@ function validateSubmit(e) {
     e.preventDefault();
 
     for (const key in formInputs ) {
-        let obj = `${formInputs[key]}-object`
+        let obj = `${formInputs[key]}-object`;
         ifEmpty(formInputs[key]);
-        validationSwitch(formInputs[key], formInputs.pin.value.toString());
+        validateSwitch(formInputs[key], formInputs.pin.value.toString());
     }
 }
 
@@ -52,7 +61,7 @@ function ifEmpty(obj) {
     }
 }
 
-function validationSwitch(obj, pin) {
+function validateSwitch(obj, pin) {
     switch(obj.type) {
         case 'text':
             break;
@@ -74,7 +83,6 @@ function validationSwitch(obj, pin) {
             error(obj, !pinRegex.test(obj.value));
             break;
         case 'pinConfirm':
-            console.log('switch pinConfirm');
             const pinConfirmRegex = /^\d{6}$/;
             if (!pinConfirmRegex.test(obj.value)) {
                 error(obj, true);
@@ -89,7 +97,6 @@ function validationSwitch(obj, pin) {
                     break;
                 }
             }
-            
         default:
           break;
       }
@@ -109,10 +116,3 @@ function error(obj, add) {
         errorP.innerHTML = defaultMessages[obj.id];
     }    
 }
-
-document.querySelector('body').addEventListener('mousedown', (e) => {
-    for (const key in formInputs ) {
-        let obj = `${formInputs[key].id}-object`
-        document.querySelector(`#${obj}`).classList.remove('shake')
-    }
-})
