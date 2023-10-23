@@ -4,8 +4,8 @@ const errorMessages = {
     lname: 'Must be at least one character',
     email: 'Must be a valid email address',
     phone: 'Must be a valid swedish cell phone number (+46123465789)',
-    pin: 'Must be exactly six numerical digits',
-    pinConfirm: 'Pin confirmation must be the same as the pin'
+    pin: 'Must be exactly six numerical digits (123456)',
+    pinConfirm: 'Pin confirmation must be six numerical digits and the same as the pin'
 }
 
 const defaultMessages = {
@@ -17,16 +17,32 @@ const defaultMessages = {
     pinConfirm: '',
 }
 
+const formInputs = {
+    fname: document.querySelector('#fname'),
+    lname: document.querySelector('#lname'),
+    email: document.querySelector('#email'),
+    phone: document.querySelector('#phone'),
+    pin: document.querySelector('#pin'),
+    pinConfirm: document.querySelector('#pinConfirm')
+}
+
+// EVENT LISTENERS
+document.querySelector('body').addEventListener('mousedown', (e) => {
+    for (const key in formInputs ) {
+        let obj = `${formInputs[key].id}-object`
+        document.querySelector(`#${obj}`).classList.remove('shake')
+    }
+})
+
+//FUNCTIONS
 var errorArray = [];
 
 // MAIN FUNCTIONS (TRIGGERED)
 function validateKeyUp (e) {
     e.preventDefault();
-    
-    const target = document.querySelector(`#${e.target.id}-element`);
-    //const errorP = document.querySelector(`#${target.id} > p`);
-    target.classList.remove('error');
 
+    const target = document.querySelector(`#${e.target.id}-object`);
+    target.classList.remove('error');
 }
 
 function validateSubmit(e) {
@@ -98,15 +114,20 @@ function validationSwitch(inp, pin) {
             error(inp, !pinRegex.test(inp.value));
             break;
         case 'pinConfirm':
-            console.log(inp.value)
-            console.log(pin)
-
-            if (inp.value != pin) {
-                error(inp, true)
+            const pinConfirmRegex = /^\d{6}$/;
+            if (!pinConfirmRegex.test(obj.value)) {
+                error(obj, true);
                 break;
             }
-            else
-                break;
+            else {
+                if (obj.value != pin) {
+                    error(obj, true);
+                    break;
+                }
+                else {
+                    break;
+                }
+            }
         default:
           break;
       }
@@ -119,6 +140,7 @@ function error(inp, add) {
 
     if (add) {
         target.classList.add('error');
+        target.classList.add('shake');
         errorP.innerHTML = errorMessages[inp.id];
         errorArray.push(true);
     }
