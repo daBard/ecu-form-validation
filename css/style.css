@@ -21,28 +21,17 @@ body main form {
 body main form .form-content .input-element {
   margin-bottom: 0.5rem;
 }
-<<<<<<< HEAD
-body main form .form-content .input-element.error {
-  animation: horizontal-shaking 0.3s linear 1 alternate;
-}
 body main form .form-content .input-element.error label, body main form .form-content .input-element.error input::placeholder, body main form .form-content .input-element.error p {
-=======
-body main form .form-content .input-object.error label, body main form .form-content .input-object.error input::placeholder, body main form .form-content .input-object.error p {
->>>>>>> a2fa78317091bf7180258f4e6a4cdbf5d88174c6
   color: red;
 }
 body main form .form-content .input-element.error input {
   border-color: red;
   box-shadow: -1px -1px 2px inset red;
 }
-<<<<<<< HEAD
-body main form .form-content .input-element label, body main form .form-content .input-element input {
-=======
-body main form .form-content .input-object.shake {
+body main form .form-content .input-element.shake {
   animation: horizontal-shaking 0.3s linear 1 alternate;
 }
-body main form .form-content .input-object label, body main form .form-content .input-object input {
->>>>>>> a2fa78317091bf7180258f4e6a4cdbf5d88174c6
+body main form .form-content .input-element label, body main form .form-content .input-element input {
   display: block;
   width: 100%;
 }
@@ -59,14 +48,10 @@ body main form .form-content .input-element input {
 body main form .form-content .input-element input::placeholder {
   color: #adadad;
 }
-<<<<<<< HEAD
-body main form .form-content .input-element p {
-=======
-body main form .form-content .input-object input:focus::placeholder {
+body main form .form-content .input-element input:focus::placeholder {
   color: transparent;
 }
-body main form .form-content .input-object p {
->>>>>>> a2fa78317091bf7180258f4e6a4cdbf5d88174c6
+body main form .form-content .input-element p {
   height: 1rem;
   font-size: 0.8rem;
 }
@@ -101,4 +86,4 @@ body main form button:hover {
   100% {
     transform: translateX(0);
   }
-}
+}/*# sourceMappingURL=style.css.map */

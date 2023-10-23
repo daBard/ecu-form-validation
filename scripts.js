@@ -26,22 +26,21 @@ const formInputs = {
     pinConfirm: document.querySelector('#pinConfirm')
 }
 
+var errorArray = [];
+
 // EVENT LISTENERS
 document.querySelector('body').addEventListener('mousedown', (e) => {
     for (const key in formInputs ) {
-        let obj = `${formInputs[key].id}-object`
-        document.querySelector(`#${obj}`).classList.remove('shake')
+        let el = `${formInputs[key].id}-element`
+        document.querySelector(`#${el}`).classList.remove('shake')
     }
 })
-
-//FUNCTIONS
-var errorArray = [];
 
 // MAIN FUNCTIONS (TRIGGERED)
 function validateKeyUp (e) {
     e.preventDefault();
 
-    const target = document.querySelector(`#${e.target.id}-object`);
+    const target = document.querySelector(`#${e.target.id}-element`);
     target.classList.remove('error');
 }
 
@@ -50,20 +49,11 @@ function validateSubmit(e) {
     
     errorArray = [];
 
-    const userInputs = {
-        fname: document.querySelector('#fname'),
-        lname: document.querySelector('#lname'),
-        email: document.querySelector('#email'),
-        phone: document.querySelector('#phone'),
-        pin: document.querySelector('#pin'),
-        pinConfirm: document.querySelector('#pinConfirm')
-    }
-
-    for (const key in userInputs ) {
-        if (userInputs[key].hasAttribute('required')) { 
-            ifEmpty(userInputs[key]); 
+    for (const key in formInputs ) {
+        if (formInputs[key].hasAttribute('required')) { 
+            ifEmpty(formInputs[key]); 
         }
-        validationSwitch(userInputs[key], userInputs.pin);
+        validationSwitch(formInputs[key], formInputs.pin);
     }
     
     if (!errorArray.includes(true)) {
@@ -89,39 +79,40 @@ function ifEmpty(inp) {
 }
 
 function validationSwitch(inp, pin) {
-    /* switch(inp.type) {
+    switch(inp.type) {
         case 'text':
-            break;
+            return;
         default:
             break;
-    } */
+    }
 
-    console.log(inp.id);
     switch(inp.id) {
         case 'email':
             const emailRegex = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
             error(inp, !emailRegex.test(inp.value));
             break;
+
         case 'phone':
-            // if (inp.value !== '' || inp.value.charAt(0) != '+' || (inp.value.charAt(0) != '0' && inp.value.charAt(1) != '4')) {
-            //     inp.value = `+46${inp.value.substring(1)}`
-            // }
-            const phoneRegex = /^(?:\+46|0046)(7[0236]\d{7})$/;
-            error(inp, !phoneRegex.test(inp.value));
+            if (inp.value != '') {
+                    const phoneRegex = /^(?:\+46|0046)(7[0236]\d{7})$/;
+                    error(inp, !phoneRegex.test(inp.value));
+                }
             break;
+
         case 'pin':
             const pinRegex = /^\d{6}$/;
             error(inp, !pinRegex.test(inp.value));
             break;
+
         case 'pinConfirm':
             const pinConfirmRegex = /^\d{6}$/;
-            if (!pinConfirmRegex.test(obj.value)) {
-                error(obj, true);
+            if (!pinConfirmRegex.test(inp.value)) {
+                error(inp, true);
                 break;
             }
             else {
-                if (obj.value != pin) {
-                    error(obj, true);
+                if (inp.value != pin) {
+                    error(inp, true);
                     break;
                 }
                 else {
@@ -147,7 +138,6 @@ function error(inp, add) {
     else {
         target.classList.remove('error');
         errorP.innerHTML = defaultMessages[inp.id];
-        errorArray.push(false);
     }
 }
 
