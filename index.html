@@ -10,41 +10,41 @@
 <body>
     
     <main>
-        <form onsubmit="validateSubmit(event)">
+        <form onsubmit="validateSubmit(event)" novalidate>
             <div class="form-content">
-                <div id="fname-object" class="input-object">
+                <div id="fname-element" class="input-element">
                     <label for="fname">First name*</label>
-                    <input type="text" id="fname" onkeyup="validateKeyUp(event)" name="fname" placeholder="John">
+                    <input type="text" id="fname" onkeyup="validateKeyUp(event)" name="fname" placeholder="John" required>
                     <p></p>
                 </div>
 
-                <div id="lname-object" class="input-object">
+                <div id="lname-element" class="input-element">
                     <label for="lname">Last name*</label>
-                    <input type="text" id="lname" onkeyup="validateKeyUp(event)" name="lname" placeholder="Doe">
+                    <input type="text" id="lname" onkeyup="validateKeyUp(event)" name="lname" placeholder="Doe" required>
                     <p></p>
                 </div>
                 
-                <div id="email-object" class="input-object">
+                <div id="email-element" class="input-element">
                     <label for="email">Email*</label>
-                    <input type="email" id="email" onkeyup="validateKeyUp(event)" name="email" placeholder="john.doe@example.com">
+                    <input type="email" id="email" onkeyup="validateKeyUp(event)" name="email" placeholder="john.doe@example.com" required>
                     <p></p>
                 </div>
             
-                <div id="phone-object" class="input-object">    
-                    <label for="phone">Cell phone number*</label>
+                <div id="phone-element" class="input-element">    
+                    <label for="phone">Cell phone number</label>
                     <input type="tel" id="phone" onkeyup="validateKeyUp(event)" name="phone" placeholder="+46123456789">
                     <p></p>
                 </div>
                 
-                <div id="pin-object" class="input-object">
+                <div id="pin-element" class="input-element">
                     <label for="pin">Pin number*</label>
-                    <input type="password" id="pin" onkeyup="validateKeyUp(event)" name="pin" placeholder="123456">
+                    <input type="password" id="pin" onkeyup="validateKeyUp(event)" name="pin" placeholder="123456" required>
                     <p>Six numerical digits (123456)</p>
                 </div>
 
-                <div id="pinConfirm-object" class="input-object">
+                <div id="pinConfirm-element" class="input-element">
                     <label for="pinConfirm">Confirm pin number*</label>
-                    <input type="password" id="pinConfirm" onkeyup="validateKeyUp(event)" name="pinConfirm" placeholder="123456">
+                    <input type="password" id="pinConfirm" onkeyup="validateKeyUp(event)" name="pinConfirm" placeholder="123456" required>
                     <p></p>
                 </div>
             </div>

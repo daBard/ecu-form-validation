@@ -18,37 +18,37 @@ body main {
 body main form {
   height: 100%;
 }
-body main form .form-content .input-object {
+body main form .form-content .input-element {
   margin-bottom: 0.5rem;
 }
-body main form .form-content .input-object.error {
+body main form .form-content .input-element.error {
   animation: horizontal-shaking 0.3s linear 1 alternate;
 }
-body main form .form-content .input-object.error label, body main form .form-content .input-object.error input::placeholder, body main form .form-content .input-object.error p {
+body main form .form-content .input-element.error label, body main form .form-content .input-element.error input::placeholder, body main form .form-content .input-element.error p {
   color: red;
 }
-body main form .form-content .input-object.error input {
+body main form .form-content .input-element.error input {
   border-color: red;
   box-shadow: -1px -1px 2px inset red;
 }
-body main form .form-content .input-object label, body main form .form-content .input-object input {
+body main form .form-content .input-element label, body main form .form-content .input-element input {
   display: block;
   width: 100%;
 }
-body main form .form-content .input-object label {
+body main form .form-content .input-element label {
   font-weight: 600;
 }
-body main form .form-content .input-object input {
+body main form .form-content .input-element input {
   margin: 0.25rem 0;
   padding: 0.5rem 0.25rem;
   border: 1px solid #adadad;
   box-shadow: -1px -1px 2px inset #adadad;
   border-radius: 5px;
 }
-body main form .form-content .input-object input::placeholder {
+body main form .form-content .input-element input::placeholder {
   color: #adadad;
 }
-body main form .form-content .input-object p {
+body main form .form-content .input-element p {
   height: 1rem;
   font-size: 0.8rem;
 }

@@ -1,3 +1,4 @@
+// VARIABLES
 const errorMessages = {
     fname: 'Must be at least one character',
     lname: 'Must be at least one character',
@@ -16,10 +17,13 @@ const defaultMessages = {
     pinConfirm: '',
 }
 
+var errorArray = [];
+
+// MAIN FUNCTIONS (TRIGGERED)
 function validateKeyUp (e) {
     e.preventDefault();
-
-    const target = document.querySelector(`#${e.target.id}-object`);
+    
+    const target = document.querySelector(`#${e.target.id}-element`);
     //const errorP = document.querySelector(`#${target.id} > p`);
     target.classList.remove('error');
 
@@ -28,7 +32,9 @@ function validateKeyUp (e) {
 function validateSubmit(e) {
     e.preventDefault();
     
-    const user = {
+    errorArray = [];
+
+    const userInputs = {
         fname: document.querySelector('#fname'),
         lname: document.querySelector('#lname'),
         email: document.querySelector('#email'),
@@ -37,53 +43,66 @@ function validateSubmit(e) {
         pinConfirm: document.querySelector('#pinConfirm')
     }
 
-    for (const key in user ) {
-        ifEmpty(user[key]);
-        validationSwitch(user[key], user.pin);
-    }   
+    for (const key in userInputs ) {
+        if (userInputs[key].hasAttribute('required')) { 
+            ifEmpty(userInputs[key]); 
+        }
+        validationSwitch(userInputs[key], userInputs.pin);
+    }
+    
+    if (!errorArray.includes(true)) {
+        const userValues = {
+            fname: document.querySelector('#fname').value,
+            lname: document.querySelector('#lname').value,
+            email: document.querySelector('#email').value,
+            phone: document.querySelector('#phone').value,
+            pin: document.querySelector('#pin').value
+        }
+        sendData(userValues);
+    }
 }
 
-function ifEmpty(obj) {
-    if (obj.value == "") {
-        error(obj, true)
+// VALIDATE FUNCTIONS
+function ifEmpty(inp) {
+    if (inp.value == "") {
+        error(inp, true)
     }
     else {
-        error(obj, false)
+        error(inp, false)
     }
 }
 
-function validationSwitch(obj, pin) {
-    switch(obj.type) {
+function validationSwitch(inp, pin) {
+    /* switch(inp.type) {
         case 'text':
             break;
         default:
             break;
-    }
-    
-    console.log(obj.value);
+    } */
 
-    switch(obj.id, pin) {
+    console.log(inp.id);
+    switch(inp.id) {
         case 'email':
             const emailRegex = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
-            error(obj, !emailRegex.test(obj.value));
+            error(inp, !emailRegex.test(inp.value));
             break;
         case 'phone':
-            // if (obj.value !== '' || obj.value.charAt(0) != '+' || (obj.value.charAt(0) != '0' && obj.value.charAt(1) != '4')) {
-            //     obj.value = `+46${obj.value.substring(1)}`
+            // if (inp.value !== '' || inp.value.charAt(0) != '+' || (inp.value.charAt(0) != '0' && inp.value.charAt(1) != '4')) {
+            //     inp.value = `+46${inp.value.substring(1)}`
             // }
             const phoneRegex = /^(?:\+46|0046)(7[0236]\d{7})$/;
-            error(obj, !phoneRegex.test(obj.value));
+            error(inp, !phoneRegex.test(inp.value));
             break;
         case 'pin':
             const pinRegex = /^\d{6}$/;
-            error(obj, !pinRegex.test(obj.value));
+            error(inp, !pinRegex.test(inp.value));
             break;
         case 'pinConfirm':
-            console.log(obj.value)
+            console.log(inp.value)
             console.log(pin)
 
-            if (obj.value != pin) {
-                error(obj, true)
+            if (inp.value != pin) {
+                error(inp, true)
                 break;
             }
             else
@@ -93,16 +112,32 @@ function validationSwitch(obj, pin) {
       }
 }
 
-function error(obj, add) {
-    const target = document.querySelector(`#${obj.id}-object`);
+// ERROR HANDLING
+function error(inp, add) {
+    const target = document.querySelector(`#${inp.id}-element`);
     const errorP = document.querySelector(`#${target.id} > p`);
 
     if (add) {
         target.classList.add('error');
-        errorP.innerHTML = errorMessages[obj.id];
+        errorP.innerHTML = errorMessages[inp.id];
+        errorArray.push(true);
     }
     else {
         target.classList.remove('error');
-        errorP.innerHTML = defaultMessages[obj.id];
+        errorP.innerHTML = defaultMessages[inp.id];
+        errorArray.push(false);
     }
+}
+
+// API FUNCTIONS
+async function sendData(userObj) {
+    userJson = JSON.stringify(userObj);
+    console.log(userJson);
+    try {
+        const result = await fetch('https://www.couchveggie.com/api');
+    }
+    catch(err) {
+        console.log(err)
+    }
+
 }
