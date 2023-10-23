@@ -15,37 +15,37 @@
             <div class="form-content">
                 <div id="fname-element" class="input-element">
                     <label for="fname">First name*</label>
-                    <input type="text" id="fname" onkeyup="validateKeyUp(event)" name="fname" placeholder="John" required>
+                    <input type="text" id="fname" onkeyup="validateKeyUp(event)" name="fname" placeholder="John" value="Arne"> <!-- required -->
                     <p></p>
                 </div>
 
                 <div id="lname-element" class="input-element">
                     <label for="lname">Last name*</label>
-                    <input type="text" id="lname" onkeyup="validateKeyUp(event)" name="lname" placeholder="Doe" required>
+                    <input type="text" id="lname" onkeyup="validateKeyUp(event)" name="lname" placeholder="Doe" value="Anka"> <!-- required -->
                     <p></p>
                 </div>
                 
                 <div id="email-element" class="input-element">
                     <label for="email">Email*</label>
-                    <input type="email" id="email" onkeyup="validateKeyUp(event)" name="email" placeholder="john.doe@example.com" required>
+                    <input type="email" id="email" onkeyup="validateKeyUp(event)" name="email" placeholder="john.doe@example.com" required value="arne.anka@example.com" >
                     <p></p>
                 </div>
             
                 <div id="phone-element" class="input-element">    
                     <label for="phone">Cell phone number</label>
-                    <input type="tel" id="phone" onkeyup="validateKeyUp(event)" name="phone" placeholder="+46123456789">
+                    <input type="tel" id="phone" onkeyup="validateKeyUp(event)" name="phone" placeholder="+46123456789" value="+46723456789">
                     <p></p>
                 </div>
                 
                 <div id="pin-element" class="input-element">
                     <label for="pin">Pin number*</label>
-                    <input type="password" id="pin" onkeyup="validateKeyUp(event)" name="pin" placeholder="123456" pattern="[0-9]*" inputmode="numeric" required>
+                    <input type="password" id="pin" onkeyup="validateKeyUp(event)" name="pin" placeholder="123456" pattern="[0-9]*" inputmode="numeric" required value="eatMyShorts1234!">
                     <p>Six numerical digits (123456)</p>
                 </div>
 
                 <div id="pinConfirm-element" class="input-element">
                     <label for="pinConfirm">Confirm pin number*</label>
-                    <input type="password" id="pinConfirm" onkeyup="validateKeyUp(event)" name="pinConfirm" placeholder="123456" pattern="[0-9]*" inputmode="numeric" required>
+                    <input type="password" id="pinConfirm" onkeyup="validateKeyUp(event)" name="pinConfirm" placeholder="123456" pattern="[0-9]*" inputmode="numeric" required value="eatMyShorts1234!">
                     <p></p>
                 </div>
             </div>
@@ -53,7 +53,13 @@
         </form>
     </main>
 
+    <footer>
+        <ul id="results"></ul>
+    </footer>
 
-    <script src="/scripts.js"></script>
+    <script src="./validate-scripts.js"></script>
+    <script src="./api-scripts.js"></script>
+
+    <script>printUsers()</script>
 </body>
 </html>
