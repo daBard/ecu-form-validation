@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>JS Form Validation</title>
+</head>
+<body>
+    
+    <main>
+        <form onsubmit="validateSubmit(event)" novalidate>
+            <div class="form-content">
+                <div id="fname-element" class="input-element">
+                    <label for="fname">First name*</label>
+                    <input type="text" id="fname" onkeyup="validateKeyUp(event)" name="fname" placeholder="John" required value="Arne">
+                    <p></p>
+                </div>
+
+                <div id="lname-element" class="input-element">
+                    <label for="lname">Last name*</label>
+                    <input type="text" id="lname" onkeyup="validateKeyUp(event)" name="lname" placeholder="Doe" required value="Anka">
+                    <p></p>
+                </div>
+                
+                <div id="email-element" class="input-element">
+                    <label for="email">Email*</label>
+                    <input type="email" id="email" onkeyup="validateKeyUp(event)" name="email" placeholder="john.doe@example.com" required value="arne.anka@example.com" >
+                    <p></p>
+                </div>
+            
+                <!-- <div id="phone-element" class="input-element">    
+                    <label for="phone">Cell phone number</label>
+                    <input type="tel" id="phone" onkeyup="validateKeyUp(event)" name="phone" placeholder="+46123456789" value="+46723456789">
+                    <p></p>
+                </div> -->
+
+                <div id="street-element" class="input-element">
+                    <label for="street">Street</label>
+                    <input type="text" id="street" onkeyup="validateKeyUp(event)" name="street" placeholder="Smörvägen 16" value="Smörvägen 16">
+                    <p></p>
+                </div>
+
+                <div id="postal-element" class="input-element">
+                    <label for="postal">Postal code</label>
+                    <input type="text" id="postal" onkeyup="validateKeyUp(event)" name="postal" placeholder="123 45" value="123 45">
+                    <p></p>
+                </div>
+
+                <div id="city-element" class="input-element">
+                    <label for="city">City</label>
+                    <input type="text" id="city" onkeyup="validateKeyUp(event)" name="city" placeholder="Ankeborg" value="Ankeborg">
+                    <p></p>
+                </div>
+                
+                <div id="password-element" class="input-element">
+                    <label for="password">Password*</label>
+                    <input type="password" id="password" onkeyup="validateKeyUp(event)" name="password" placeholder="" required value="eatMyShorts1234!"> <!-- pattern="[0-9]*" inputmode="numeric" -->
+                    <p>Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character</p>
+                </div>
+
+                <div id="passwordConfirm-element" class="input-element">
+                    <label for="passwordConfirm">Confirm password number*</label>
+                    <input type="password" id="passwordConfirm" onkeyup="validateKeyUp(event)" name="passwordConfirm" placeholder="" required value="eatMyShorts1234!">
+                    <p></p>
+                </div>
+            </div>
+            <div class="btn-grp">
+                <button type="submit" class="btn">Register Now!</button>
+                <a href="index.html" class="btn">Back to user list</a>
+            </div>
+        </form>
+    </main>
+
+    <script src="./validate-scripts.js"></script>
+    <script src="./api-scripts.js"></script>
+</body>
+</html>

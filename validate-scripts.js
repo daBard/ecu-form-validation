@@ -3,27 +3,36 @@ const errorMessages = {
     fname: 'Must be at least one character',
     lname: 'Must be at least one character',
     email: 'Must be a valid email address',
-    phone: 'Must be a valid swedish cell phone number (+46123465789)',
-    pin: 'Must be exactly six numerical digits (123456)',
-    pinConfirm: 'Pin confirmation must be six numerical digits and the same as the pin'
+    // phone: 'Must be a valid swedish cell phone number (+46123465789)',
+    street: '',
+    postal: 'Format is "123 45"',
+    city: '',
+    password: 'Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character',
+    passwordConfirm: 'password confirmation must be the same as the password'
 }
 
 const defaultMessages = {
     fname: '',
     lname: '',
     email: '',
-    phone: '',
-    pin: 'Six numerical digits (123456)',
-    pinConfirm: '',
+    // phone: '',
+    street: '',
+    postal: '',
+    city: '',
+    password: 'Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character',
+    passwordConfirm: '',
 }
 
 const formInputs = {
     fname: document.querySelector('#fname'),
     lname: document.querySelector('#lname'),
     email: document.querySelector('#email'),
-    phone: document.querySelector('#phone'),
-    pin: document.querySelector('#pin'),
-    pinConfirm: document.querySelector('#pinConfirm')
+    //phone: document.querySelector('#phone'),
+    street: document.querySelector('#street'),
+    postal: document.querySelector('#postal'),
+    city: document.querySelector('#city'),
+    password: document.querySelector('#password'),
+    passwordConfirm: document.querySelector('#passwordConfirm')
 }
 
 var errorArray = []
@@ -53,7 +62,7 @@ function validateSubmit(e) {
         if (formInputs[key].hasAttribute('required')) { 
             ifEmpty(formInputs[key]) 
         }
-        validationSwitch(formInputs[key], formInputs.pin)
+        validationSwitch(formInputs[key], formInputs.password)
     }
     
     if (!errorArray.includes(true)) {
@@ -61,9 +70,12 @@ function validateSubmit(e) {
             fname: document.querySelector('#fname').value,
             lname: document.querySelector('#lname').value,
             email: document.querySelector('#email').value,
-            phone: document.querySelector('#phone').value,
-            pin: document.querySelector('#pin').value,
-            confirmPin: document.querySelector('#pin').value
+            //phone: document.querySelector('#phone').value,
+            street: document.querySelector('#street').value,
+            postal: document.querySelector('#postal').value,
+            city: document.querySelector('#city').value,
+            password: document.querySelector('#password').value,
+            passwordConfirm: document.querySelector('#password').value
         }
         postUser(userValues)
     }
@@ -79,37 +91,52 @@ function ifEmpty(inp) {
     }
 }
 
-function validationSwitch(inp, pin) {
-    switch(inp.type) {
-        case 'text':
-            return
-        default:
-            break
-    }
+function validationSwitch(inp, password) {
+    // switch(inp.type) {
+    //     case 'text':
+    //         return
+    //     default:
+    //         break
+    // }
 
     switch(inp.id) {
+        case 'fname':
+            const fnameRegex = /^[a-zA-Z\s\-]+$/
+            error(inp, !fnameRegex.test(inp.value))
+            break
+
+        case 'lname':
+            const lnameRegex = /^[a-zA-Z\s\-]+$/
+            error(inp, !lnameRegex.test(inp.value))
+            break
+
         case 'email':
             const emailRegex = /(([^<>()\[\]\\.,:\s@"]+(\.[^<>()\[\]\\.,:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/
             error(inp, !emailRegex.test(inp.value))
             break
 
-        case 'phone':
-            if (inp.value != '') {
-                    const phoneRegex = /^(?:\+46|0046)(7[0236]\d{7})$/
-                    error(inp, !phoneRegex.test(inp.value))
-                }
+        // case 'phone':
+        //     if (inp.value != '') {
+        //             const phoneRegex = /^(?:\+46|0046)(7[0236]\d{7})$/
+        //             error(inp, !phoneRegex.test(inp.value))
+        //         }
+        //     break
+
+        case 'postal':
+            const postalRegex = /^\d{3} \d{2}$/
+            error(inp, !postalRegex.test(inp.value))
             break
 
-        case 'pin':
-            //const pinRegex = /^\d{6}$/
-            const pinRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/
-            error(inp, !pinRegex.test(inp.value))
+        case 'password':
+            //const passwordRegex = /^\d{6}$/
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/
+            error(inp, !passwordRegex.test(inp.value))
             break
 
-        case 'pinConfirm':
-            //const pinConfirmRegex = /^\d{6}$/
-            const pinConfirmRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/
-            if (!pinConfirmRegex.test(inp.value) && (inp.value != pin)) {
+        case 'passwordConfirm':
+            //const passwordConfirmRegex = /^\d{6}$/
+            const passwordConfirmRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/
+            if (!passwordConfirmRegex.test(inp.value) && (inp.value != password)) {
                 error(inp, true)
                 break
             }

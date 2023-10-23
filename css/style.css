@@ -3,6 +3,31 @@
   font-size: 16px;
 }
 
+ul li {
+  transition: all 0.3s ease-in-out;
+}
+ul li:hover {
+  background-color: #222222;
+  color: #dedede;
+}
+
+.btn {
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.62rem 1rem;
+  cursor: pointer;
+  border: 1px solid #adadad;
+  border-radius: 5px;
+  background-color: #222222;
+  color: #dedede;
+  box-shadow: -1px -1px 2px #adadad;
+  transition: all 0.3s ease-in-out;
+}
+.btn:hover {
+  background-color: #dedede;
+  color: #222222;
+}
+
 body {
   height: 100dvh;
   width: 100dvw;
@@ -11,6 +36,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 body main {
+  height: 100%;
   width: 100%;
   max-width: 640px;
   padding: 1rem;
@@ -52,32 +78,27 @@ body main form .form-content .input-element input:focus::placeholder {
   color: transparent;
 }
 body main form .form-content .input-element p {
-  height: 1rem;
+  height: 2rem;
   font-size: 0.8rem;
 }
-body main form button {
-  padding: 0.62rem 1rem;
-  cursor: pointer;
-  border: 1px solid #adadad;
-  border-radius: 5px;
-  background-color: #222222;
-  color: #dedede;
-  box-shadow: -1px -1px 2px #adadad;
-  transition: all 0.3s ease-in-out;
+body main div ul li {
+  border: 1px solid rgb(180, 180, 180);
 }
-body main form button:hover {
-  scale: 1.05;
-  box-shadow: -2px -2px 4px #adadad;
-}
-body footer {
-  padding: 1rem;
-}
-body footer ul li {
+body main div ul li a {
   padding: 0.5rem 0 0.5rem 1.5rem;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  line-height: 1.25;
 }
-body footer ul li::before {
+body main div ul li a::before {
+  display: flex;
+  align-items: center;
   content: "⍟";
+  font-size: 1.25rem;
   padding-right: 0.5rem;
+  height: 100%;
 }
 
 @keyframes horizontal-shaking {
